@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name= "billing_tracker")
 public class Billings {
     @Id // creating the primary key by default
-    @GeneratedValue(strategy = GenerationType.AUTO) //generating the pks automatically
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //generating the pks automatically
     private long id;
 
     @Column(name = "bill_type")
