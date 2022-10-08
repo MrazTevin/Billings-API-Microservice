@@ -2,6 +2,7 @@ package com.microservice.springbootbackend;
 
 import com.microservice.springbootbackend.Models.Billings;
 import com.microservice.springbootbackend.Repository.BillingRepository;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
