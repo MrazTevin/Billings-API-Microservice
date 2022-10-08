@@ -1,13 +1,15 @@
 package com.microservice.springbootbackend.Controller;
 
+import com.microservice.springbootbackend.Exception.ResourceNotFound;
 import com.microservice.springbootbackend.Models.Billings;
 import com.microservice.springbootbackend.Repository.BillingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+//import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/billings")
@@ -20,8 +22,18 @@ public class BillingsController {
         return billingRepository.findAll();
     }
 
-//    // create employee REST api
-//    public List<Billings> addNewBillings() {
-//
+    // create billings REST api
+    @PostMapping
+    public Billings addNewBillings(@RequestBody  Billings billings) {
+        return billingRepository.save(billings);
+    }
+
+    // get billing by id REST API
+
+//    @GetMapping("{id}")
+//    public ResponseEntity<Billings> getBillingById(long id) {
+//        return billingRepository;
 //    }
+
+
 }
