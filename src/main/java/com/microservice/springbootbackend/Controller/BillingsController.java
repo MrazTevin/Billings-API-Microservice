@@ -37,8 +37,8 @@ public class BillingsController {
 
         return ResponseEntity.ok(billings);
     }
-
-    public ResponseEntity<Billings> updateBillings(long id, Billings userBillings) {
+    @PutMapping("{id}")
+    public ResponseEntity<Billings> updateBillings(@PathVariable long id, @RequestBody Billings userBillings) {
         Billings updateBillings = billingRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
 
