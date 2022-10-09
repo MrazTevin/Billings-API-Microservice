@@ -30,10 +30,13 @@ public class BillingsController {
 
     // get billing by id REST API
 
-//    @GetMapping("{id}")
-//    public ResponseEntity<Billings> getBillingById(long id) {
-//        return billingRepository;
-//    }
+    @GetMapping("{id}")
+    public ResponseEntity<Billings> getBillingById(@PathVariable long id) {
+        Billings billings = billingRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
+
+        return ResponseEntity.ok(billings);
+    }
 
 
 }
