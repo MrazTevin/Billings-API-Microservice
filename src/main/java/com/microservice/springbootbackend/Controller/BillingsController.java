@@ -37,6 +37,7 @@ public class BillingsController {
 
         return ResponseEntity.ok(billings);
     }
+    // update the billings
     @PutMapping("{id}")
     public ResponseEntity<Billings> updateBillings(@PathVariable long id,@RequestBody Billings userBillings) {
         Billings updateBillings = billingRepository.findById(id)
@@ -50,5 +51,17 @@ public class BillingsController {
         billingRepository.save((updateBillings));
 
         return ResponseEntity.ok(updateBillings);
+    }
+
+    // delete the billings
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<HttpStatus> deleteBilling(@PathVariable long id) {
+        Billings billings = billingRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFound("Employee not exist with id: " + id));
+
+        billingRepository.delete(billings);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
