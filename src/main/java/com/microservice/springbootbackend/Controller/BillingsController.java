@@ -38,14 +38,14 @@ public class BillingsController {
         return ResponseEntity.ok(billings);
     }
     @PutMapping("{id}")
-    public ResponseEntity<Billings> updateBillings(@PathVariable long id, @RequestBody Billings userBillings) {
+    public ResponseEntity<Billings> updateBillings(@PathVariable long id,@RequestBody Billings userBillings) {
         Billings updateBillings = billingRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
 
-        updateBillings.setAmount(updateBillings.getAmount());
-        updateBillings.setCategoryid(updateBillings.getCategoryid());
-        updateBillings.setName(updateBillings.getName());
-        updateBillings.setType(updateBillings.getType());
+        updateBillings.setAmount(userBillings.getAmount());
+        updateBillings.setCategoryid(userBillings.getCategoryid());
+        updateBillings.setName(userBillings.getName());
+        updateBillings.setType(userBillings.getType());
 
         billingRepository.save((updateBillings));
 
