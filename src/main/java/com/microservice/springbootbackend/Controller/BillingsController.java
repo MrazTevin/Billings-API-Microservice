@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 //import java.util.Optional;
 
@@ -64,4 +65,22 @@ public class BillingsController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Billings>> searchAllBills(@RequestParam(required = false) String name) {
+        try {
+            List<Billings> billings = new ArrayList<Billings>();
+            if (name == null)
+                billingRepository.findAll().forEach(billings::add);
+            else
+                billingRepository.findByName(name).forEach(billings::add);
+            if (billings.isEmpty())  {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(billings, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
