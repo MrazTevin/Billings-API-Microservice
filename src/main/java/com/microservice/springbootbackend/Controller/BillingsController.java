@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/billings")
-public class git BillingsController {
+public class BillingsController {
     @Autowired
     private BillingRepository billingRepository;
 
