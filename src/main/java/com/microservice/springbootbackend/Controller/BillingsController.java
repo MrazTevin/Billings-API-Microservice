@@ -1,6 +1,6 @@
 package com.microservice.springbootbackend.Controller;
 
-import com.microservice.springbootbackend.Exception.ResourceNotFound;
+import com.microservice.springbootbackend.Models.Exception.ResourceNotFound;
 import com.microservice.springbootbackend.Models.Billings;
 import com.microservice.springbootbackend.Repository.BillingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,20 +39,20 @@ public class BillingsController {
         return ResponseEntity.ok(billings);
     }
     // update the billings
-    @PutMapping("{id}")
-    public ResponseEntity<Billings> updateBillings(@PathVariable long id,@RequestBody Billings userBillings) {
-        Billings updateBillings = billingRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
-
-        updateBillings.setAmount(userBillings.getAmount());
-        updateBillings.setCategoryid(userBillings.getCategoryid());
-        updateBillings.setName(userBillings.getName());
-        updateBillings.setType(userBillings.getType());
-
-        billingRepository.save((updateBillings));
-
-        return ResponseEntity.ok(updateBillings);
-    }
+//    @PutMapping("{id}")
+//    public ResponseEntity<Billings> updateBillings(@PathVariable long id,@RequestBody Billings userBillings) {
+//        Billings updateBillings = billingRepository.findById(id)
+//                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
+//
+//        updateBillings.setAmount(userBillings.getAmount());
+//        updateBillings.setCategoryid(userBillings.getCategoryid());
+//        updateBillings.setName(userBillings.getName());
+//        updateBillings.setType(userBillings.getType());
+//
+//        billingRepository.save((updateBillings));
+//
+//        return ResponseEntity.ok(updateBillings);
+//    }
 
     // delete the billings
 
