@@ -1,4 +1,4 @@
-package com.microservice.springbootbackend.Models;
+ package com.microservice.springbootbackend.Models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,12 +19,15 @@ public class Billings {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //generating the pks automatically
     private long id;
 
-    @Column(name = "bill_type")
-    private String type;
-    @Column(name = "amount")
-    private int amount;
-    @Column(name = "category_id")
-    private String categoryid;
     @Column(name = "bill_name")
     private String name;
+
+    private String description;
+
+    @Column(name = "bill_amount")
+    private BigDecimal amount;
+
+    private String category;
+
+    private Date date;
 }
