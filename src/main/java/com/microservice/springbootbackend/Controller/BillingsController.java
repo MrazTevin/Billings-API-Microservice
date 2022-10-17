@@ -34,25 +34,26 @@ public class BillingsController {
     @GetMapping("{id}")
     public ResponseEntity<Billings> getBillingById(@PathVariable long id) {
         Billings billings = billingRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
+                .orElseThrow(()-> new RuntimeException("Billings not found with id: " + id));
 
         return ResponseEntity.ok(billings);
     }
     // update the billings
-//    @PutMapping("{id}")
-//    public ResponseEntity<Billings> updateBillings(@PathVariable long id,@RequestBody Billings userBillings) {
-//        Billings updateBillings = billingRepository.findById(id)
-//                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
-//
-//        updateBillings.setAmount(userBillings.getAmount());
-//        updateBillings.setCategoryid(userBillings.getCategoryid());
-//        updateBillings.setName(userBillings.getName());
-//        updateBillings.setType(userBillings.getType());
-//
-//        billingRepository.save((updateBillings));
-//
-//        return ResponseEntity.ok(updateBillings);
-//    }
+    @PutMapping("{id}")
+    public ResponseEntity<Billings> updateBillings(@PathVariable long id,@RequestBody Billings userBillings) {
+        Billings updateBillings = billingRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
+
+
+        updateBillings.setName(userBillings.getName() != null? userBillings.getName() : updateBillings.getName());
+        updateBillings.setAmount(userBillings.getAmount() !=null? userBillings.getAmount() : updateBillings.getAmount());
+        updateBillings.setCategory(userBillings.getCategory() !=null? userBillings.getCategory() : updateBillings.getCategory());
+        updateBillings.setDescription(userBillings.getDescription() !=null? userBillings.getDescription() : updateBillings.getDescription());
+        updateBillings.setDate(userBillings.getDate() !=null? userBillings.getDate() : updateBillings.getDate());
+        billingRepository.save(updateBillings);
+
+        return ResponseEntity.ok(updateBillings);
+    }
 
     // delete the billings
 
