@@ -4,12 +4,17 @@ import com.microservice.springbootbackend.Models.Exception.ResourceNotFound;
 import com.microservice.springbootbackend.Models.Billings;
 import com.microservice.springbootbackend.Repository.BillingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 //import java.util.Optional;
 
 @RestController
@@ -18,12 +23,39 @@ public class BillingsController {
     @Autowired
     private BillingRepository billingRepository;
 
-    @GetMapping
-    public List<Billings> getAllBillings() {
-        return billingRepository.findAll();
-    }
+//    @GetMapping
+//    public List<Billings> getAllBillings() {
+//        return billingRepository.findAll();
+//    }
 
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getAllBillings(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size
+    ) {
+       try {
+           List<Billings> billings = new ArrayList<Billings>();
+           Pageable paging = PageRequest.of(page,size);
+
+           Page<Billings> pageResults;
+           pageResults = billingRepository.findAll(paging);
+
+           billings = pageResults.getContent();
+
+           Map<String, Object> response = new HashMap<>();
+           response.put("billings", billings);
+           response.put("currentPage", pageResults.getNumber());
+           response.put("totalItems", pageResults.getTotalElements());
+           response.put("totalPages", pageResults.getTotalPages());
+
+           return new ResponseEntity<>(response, HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+
+    }
     // create billings REST api
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
     public Billings addNewBillings(@RequestBody  Billings billings) {
         return billingRepository.save(billings);
