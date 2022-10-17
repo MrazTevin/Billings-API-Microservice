@@ -1,6 +1,6 @@
 package com.microservice.springbootbackend.Controller;
 
-import com.microservice.springbootbackend.Models.Exception.ResourceNotFound;
+import com.microservice.springbootbackend.Exception.ResourceNotFound;
 import com.microservice.springbootbackend.Models.Billings;
 import com.microservice.springbootbackend.Repository.BillingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class BillingsController {
     @GetMapping("{id}")
     public ResponseEntity<Billings> getBillingById(@PathVariable long id) {
         Billings billings = billingRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Billings not found with id: " + id));
+                .orElseThrow(()-> new ResourceNotFound("Billings not found with id: " + id));
 
         return ResponseEntity.ok(billings);
     }

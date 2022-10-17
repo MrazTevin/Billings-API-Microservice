@@ -1,4 +1,4 @@
-package com.microservice.springbootbackend.Models.Exception;
+package com.microservice.springbootbackend.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
