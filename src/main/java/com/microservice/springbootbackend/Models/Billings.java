@@ -1,6 +1,7 @@
  package com.microservice.springbootbackend.Models;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -28,5 +29,8 @@ public class Billings {
 
     private String category;
 
+
+    @CreatedDate
+    @Temporal(TemporalType.DATE)
     private Date date;
 }
