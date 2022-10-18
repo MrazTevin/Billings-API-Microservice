@@ -3,6 +3,8 @@ package com.microservice.springbootbackend.Controller;
 import com.microservice.springbootbackend.Exception.ResourceNotFound;
 import com.microservice.springbootbackend.Models.Billings;
 import com.microservice.springbootbackend.Repository.BillingRepository;
+import com.microservice.springbootbackend.Service.BillingService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +25,7 @@ import java.util.Map;
 public class BillingsController {
     @Autowired
     private BillingRepository billingRepository;
+    private BillingService billingService;
 
 //    @GetMapping
 //    public List<Billings> getAllBillings() {
@@ -117,4 +120,17 @@ public class BillingsController {
         }
     }
 
+    @GetMapping("/category")
+    public ResponseEntity<List<Billings>> getExpensesByCategory(@RequestParam String category) {
+//       return billingService.readByCategory(category, page);
+        List<Billings> billings = new ArrayList<>();
+        if (category == null)
+            billingRepository.findAll().forEach(billings::add);
+        else
+            billingRepository.findByCategory(category).forEach(billings::add);
+        if (category.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(billings, HttpStatus.OK);
+    }
 }
