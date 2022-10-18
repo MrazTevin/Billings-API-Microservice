@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +58,7 @@ public class BillingsController {
     // create billings REST api
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping
-    public Billings addNewBillings(@RequestBody  Billings billings) {
+    public Billings addNewBillings(@Valid @RequestBody  Billings billings) {
         return billingRepository.save(billings);
     }
 
