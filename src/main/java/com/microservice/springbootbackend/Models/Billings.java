@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -24,19 +25,22 @@ public class Billings {
     private long id;
 
     @Column(name = "bill_name")
-    @NotNull(message = "Billing name must not be null")
+    @NotBlank(message = "Billing name must not be null")
     private String name;
 
     private String description;
 
     @Column(name = "bill_amount")
+    @NotNull(message = "Expense amount should not be null")
     private BigDecimal amount;
 
+    @NotBlank(message = "Category should not be null")
     private String category;
 
 
     @CreatedDate
     @Temporal(TemporalType.DATE)
+    @NotNull(message = "Date must not be null")
     private Date date;
 
     @Column(name = "created_at", nullable = false, updatable = false)
