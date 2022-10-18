@@ -31,7 +31,7 @@ public class Billings {
     private String description;
 
     @Column(name = "bill_amount")
-    @NotNull(message = "Expense amount should not be null")
+    @NotNull(message = "Billing amount should not be null")
     private BigDecimal amount;
 
     @NotBlank(message = "Category should not be null")
