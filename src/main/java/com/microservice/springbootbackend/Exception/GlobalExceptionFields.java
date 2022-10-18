@@ -58,7 +58,7 @@ public class GlobalExceptionFields extends ResponseEntityExceptionHandler {
 //        return super.handleMethodArgumentNotValid(ex, headers, status, request);
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("timestamp", new Date());
-        body.put("statusCode", HttpStatus.BAD_REQUEST);
+        body.put("statusCode", HttpStatus.BAD_REQUEST.value());
         List<String> errors = ex.getBindingResult().getFieldErrors()
                 .stream()
                 .map(x -> x.getDefaultMessage())
