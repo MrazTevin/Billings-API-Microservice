@@ -1,2 +1,14 @@
-package com.microservice.springbootbackend.Models;public class UserModel {
+package com.microservice.springbootbackend.Models;
+
+import lombok.Data;
+
+@Data
+public class UserModel {
+    private String name;
+
+    private String email;
+
+    private String password;
+
+    private Long age = 0L;
 }
