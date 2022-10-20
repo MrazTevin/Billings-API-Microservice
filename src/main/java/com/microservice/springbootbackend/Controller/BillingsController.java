@@ -12,12 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 //import java.util.Optional;
 
 @RestController
@@ -133,4 +131,17 @@ public class BillingsController {
         }
         return new ResponseEntity<>(billings, HttpStatus.OK);
     }
+
+//    public ResponseEntity<List<Billings>> getExpenseBydDate(Date startDate, Date endDate) {
+//        List<Billings> billings = new ArrayList<>();
+//        if (startDate == null) {
+//            startDate = new Date(0);
+//        }
+//
+//        if (endDate == null) {
+//            endDate = new Date(System.currentTimeMillis());
+//        }
+//        return  billingRepository.findByDateBetween(startDate, endDate).toList();
+//
+//    }
 }
