@@ -27,7 +27,7 @@ public class User {
 
     private String password;
 
-    private Long age;
+//    private Long age;
 
     @Column(name="created_at", nullable = false, updatable = false)
     @CreationTimestamp
