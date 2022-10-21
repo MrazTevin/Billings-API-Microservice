@@ -10,5 +10,5 @@ public class UserModel {
 
     private String password;
 
-    private Long age = 0L;
+//    private Long age = 0L;
 }
