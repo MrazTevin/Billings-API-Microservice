@@ -2,6 +2,7 @@ package com.microservice.springbootbackend.Models;
 
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,6 +13,7 @@ public class UserModel {
     private String name;
 
     @NotNull(message = "Email should not be empty")
+    @Email(message = "Enter a valid email")
     private String email;
 
     @NotNull(message= "password should not be empty")
