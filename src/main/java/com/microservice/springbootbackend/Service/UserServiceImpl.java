@@ -1,6 +1,7 @@
 package com.microservice.springbootbackend.Service;
 
 import com.microservice.springbootbackend.Exception.EmailExistsException;
+import com.microservice.springbootbackend.Exception.ResourceNotFound;
 import com.microservice.springbootbackend.Models.User;
 import com.microservice.springbootbackend.Models.UserModel;
 import com.microservice.springbootbackend.Repository.UserRepository;
@@ -21,5 +22,9 @@ public class UserServiceImpl implements UserService{
         User newUser = new User();
         BeanUtils.copyProperties(user, newUser);
         return userRepository.save(newUser);
+    }
+    @Override
+    public User readUser(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Users not found for the id: " + id));
     }
 }
