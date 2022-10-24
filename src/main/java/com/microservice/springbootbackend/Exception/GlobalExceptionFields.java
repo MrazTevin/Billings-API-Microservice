@@ -54,14 +54,14 @@ public class GlobalExceptionFields extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ErrorObject handleEmailException(Exception ex, WebRequest request) {
+    public ResponseEntity<ErrorObject> handleEmailException(Exception ex, WebRequest request) {
         ErrorObject errorObject = new ErrorObject();
         errorObject.setStatusCode(HttpStatus.CONFLICT.value());
 
         errorObject.setMessage(ex.getMessage());
         errorObject.setTimestamp(new Date());
 
-        return errorObject;
+        return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.CONFLICT);
     }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
