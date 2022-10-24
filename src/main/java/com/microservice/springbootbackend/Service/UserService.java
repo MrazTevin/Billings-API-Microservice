@@ -6,4 +6,5 @@ import com.microservice.springbootbackend.Models.UserModel;
 public interface UserService {
 
   User createUser(UserModel user);
+  User readUser(UserModel user);
 }
